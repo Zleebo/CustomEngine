@@ -1,0 +1,28 @@
+# Build output
+bin/*.exe
+bin/*.pdb
+bin/imgui.ini
+bin/path
+int-bin/
+lib/
+
+# External dependency sample binaries
+tools/source/External/imguizmo/bin/
+
+# Generated Visual Studio project files (regenerate with tools/generate_projects.bat)
+local/
+Tools.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# OS
+Thumbs.db
+.DS_Store

@@ -1,0 +1,100 @@
+[
+  {
+    "Name": "Car",
+    "Model": "kenney_race_body.obj",
+    "Texture": "kenney_car_colormap.png",
+    "Position": { "X": 0.0, "Y": 2.0, "Z": 0.0 },
+    "Rotation": { "X": 0.0, "Y": 0.0, "Z": 0.0 },
+    "Scale": { "X": 1.0, "Y": 1.0, "Z": 1.0 },
+    "Components": [
+      {
+        "type": "RigidbodyComponent",
+        "props": {
+          "Mass": 12.0,
+          "Linear Drag": 0.03,
+          "Angular Drag": 0.25,
+          "Bounciness": 0.02,
+          "Is Static": false,
+          "Use Gravity": true,
+          "Ignore Terrain": false,
+          "Collider Type": 0,
+          "Half Extents": [0.95, 0.14, 1.50],
+          "Collider Center": [0.0, -0.10, 0.0],
+          "Center Of Mass": [0.0, -0.20, -0.06],
+          "Inertia Scale": [0.95, 0.72, 1.08],
+          "Velocity": [0.0, 0.0, 0.0],
+          "Angular Velocity": [0.0, 0.0, 0.0]
+        }
+      },
+      {
+        "type": "CarController",
+        "props": {
+          "Acceleration": 120.0,
+          "Reverse Accel": 60.0,
+          "Max Speed": 42.0,
+          "Brake Strength": 6.0,
+          "Longitudinal Grip": 40.0,
+          "Lateral Grip": 10.0,
+          "Tire Friction": 3.0,
+          "Rolling Resistance": 0.01,
+          "Air Pitch Control": 0.0,
+          "Air Roll Control": 0.0,
+          "Air Yaw Control": 0.0,
+          "Wheel Radius": 0.42,
+          "Rest Length": 0.26,
+          "Max Length": 0.60,
+          "Suspension Hz": 5.0,
+          "Suspension Damping": 1.2
+        }
+      },
+      {
+        "type": "FollowCameraComponent",
+        "props": {
+          "Distance": 8.0,
+          "Height": 3.5,
+          "Lag Speed": 6.0
+        }
+      }
+    ]
+  },
+  {
+    "Name": "WheelFL",
+    "ParentIndex": 0,
+    "Model": "kenney_wheel_default.obj",
+    "Texture": "kenney_car_colormap.png",
+    "Position": { "X": -0.92, "Y": -0.08, "Z": 1.42 },
+    "Rotation": { "X": 0.0, "Y": 0.0, "Z": 0.0 },
+    "Scale": { "X": 1.0, "Y": 1.0, "Z": 1.0 },
+    "Components": []
+  },
+  {
+    "Name": "WheelFR",
+    "ParentIndex": 0,
+    "Model": "kenney_wheel_default.obj",
+    "Texture": "kenney_car_colormap.png",
+    "Position": { "X": 0.92, "Y": -0.08, "Z": 1.42 },
+    "Rotation": { "X": 0.0, "Y": 0.0, "Z": 0.0 },
+    "Scale": { "X": 1.0, "Y": 1.0, "Z": 1.0 },
+    "Components": []
+  },
+  {
+    "Name": "WheelBL",
+    "ParentIndex": 0,
+    "Model": "kenney_wheel_default.obj",
+    "Texture": "kenney_car_colormap.png",
+    "Position": { "X": -0.92, "Y": -0.08, "Z": -1.42 },
+    "Rotation": { "X": 0.0, "Y": 0.0, "Z": 0.0 },
+    "Scale": { "X": 1.0, "Y": 1.0, "Z": 1.0 },
+    "Components": []
+  },
+  {
+    "Name": "WheelBR",
+    "ParentIndex": 0,
+    "Model": "kenney_wheel_default.obj",
+    "Texture": "kenney_car_colormap.png",
+    "Position": { "X": 0.92, "Y": -0.08, "Z": -1.42 },
+    "Rotation": { "X": 0.0, "Y": 0.0, "Z": 0.0 },
+    "Scale": { "X": 1.0, "Y": 1.0, "Z": 1.0 },
+    "Components": []
+  }
+]
