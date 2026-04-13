@@ -25,7 +25,15 @@ cd tools
 generate_projects.bat
 ```
 
-Opens `Tools.sln`. Build targets: **Editor** (full editor), **GameLauncher** (runtime only).
+This generates `Tools.sln` at the repo root and the project files under `local/`. Build targets: **Editor** (full editor), **GameLauncher** (runtime only).
+
+The root `build.bat` script can also build the solution directly once the project files exist.
+
+## Where to look first
+
+- `tools/source/Editor/` for the editor UI, scene tools, and command-based undo/redo flow
+- `tools/source/Engine/GraphicsEngine/Terrain/` for the terrain renderer and shared heightmap/collision pipeline
+- `tools/source/Projects/ExampleGame/` for the sample gameplay code and vehicle/autotest work
 
 ## Structure
 
@@ -34,5 +42,5 @@ tools/source/
   Editor/       - editor UI, tools, commands
   Engine/       - renderer, physics, scene, math
   GameLauncher/ - runtime executable
-  ExampleGame/  - game logic and autotests
+  Projects/     - sample game code and autotests
 ```

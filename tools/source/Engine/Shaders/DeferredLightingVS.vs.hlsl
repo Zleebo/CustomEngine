@@ -4,10 +4,15 @@ struct VSOutput
     float2 uv : TEXCOORD0;
 };
 
-VSOutput main(uint vertexID : SV_VertexID)
+struct VSInput
+{
+    uint vertexID : SV_VertexID;
+};
+
+VSOutput main(VSInput input)
 {
     VSOutput output;
-    float2 uv = float2((vertexID << 1) & 2, vertexID & 2);
+    float2 uv = float2((input.vertexID << 1) & 2, input.vertexID & 2);
     output.uv = uv;
     output.position = float4(uv * float2(2.0f, -2.0f) + float2(-1.0f, 1.0f), 0.0f, 1.0f);
     return output;

@@ -6,7 +6,6 @@
 
 
 class Model;
-//struct ID3D11Device;
 
 class ModelFactory
 {
@@ -14,11 +13,9 @@ public:
 	ModelFactory();
 	~ModelFactory() = default;
 
-	ModelInstance CreateInstance(const char *model_path);
+	ModelInstance CreateInstance(const char* aModelPath);
 
 private:
-	Model* GetModel(const char*);
-
-private:
+	Model* GetModel(const char* aModelPath);
 	std::unordered_map<std::string, std::unique_ptr<Model>> myModelCache;
 };

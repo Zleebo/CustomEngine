@@ -4,23 +4,19 @@
 #include "ModelInstance.h"
 #include "Model.h"
 
-#include <fstream>
-
-#include <DX11Framework.h>
-
 ModelFactory::ModelFactory()
 {
 	myModelCache = std::unordered_map<std::string, std::unique_ptr<Model>>();
 }
 
-ModelInstance ModelFactory::CreateInstance(const char* model_path)
+ModelInstance ModelFactory::CreateInstance(const char* aModelPath)
 {
-	return ModelInstance(GetModel(model_path));
+	return ModelInstance(GetModel(aModelPath));
 }
 
-Model* ModelFactory::GetModel(const char* someFilePath)
+Model* ModelFactory::GetModel(const char* aModelPath)
 {
-	const std::string key = someFilePath ? someFilePath : "";
+	const std::string key = aModelPath ? aModelPath : "";
 	auto it = myModelCache.find(key);
 	if (it != myModelCache.end())
 	{

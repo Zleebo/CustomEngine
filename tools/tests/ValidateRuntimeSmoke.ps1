@@ -45,6 +45,24 @@ function Assert-FileExists {
     Assert-True (Test-Path $Path) "Missing file: $Path"
 }
 
+function Get-MSBuildPath {
+    $vsWhere = Join-Path ${env:ProgramFiles(x86)} "Microsoft Visual Studio\Installer\vswhere.exe"
+    if (Test-Path $vsWhere) {
+        $result = & $vsWhere -latest -products * -requires Microsoft.Component.MSBuild -find "MSBuild\**\Bin\MSBuild.exe" |
+            Select-Object -First 1
+        if (-not [string]::IsNullOrWhiteSpace($result)) {
+            return $result
+        }
+    }
+
+    $msbuild = Get-Command msbuild.exe -ErrorAction SilentlyContinue
+    if ($null -ne $msbuild) {
+        return $msbuild.Source
+    }
+
+    throw "Could not locate MSBuild.exe. Install Visual Studio Build Tools 2022 or add MSBuild to PATH."
+}
+
 function Read-JsonFile {
     param([string]$Path)
     Assert-FileExists $Path
@@ -407,7 +425,7 @@ foreach ($requiredAsset in @(
 Write-Output "[Smoke] JSON / resources / runtime-wiring checks passed."
 
 if ($Build) {
-    $msbuild = "D:\\VisualStudio\\MSBuild\\Current\\Bin\\MSBuild.exe"
+    $msbuild = Get-MSBuildPath
     Assert-FileExists $msbuild
     & $msbuild "local\\ExampleGame.vcxproj" "/p:Configuration=Debug" "/p:Platform=x64" "/m"
     if ($LASTEXITCODE -ne 0) {
@@ -417,7 +435,7 @@ if ($Build) {
 }
 
 if ($Drive) {
-    $msbuild = "D:\\VisualStudio\\MSBuild\\Current\\Bin\\MSBuild.exe"
+    $msbuild = Get-MSBuildPath
     Assert-FileExists $msbuild
     & $msbuild "local\\GameLauncher.vcxproj" "/p:Configuration=Debug" "/p:Platform=x64" "/m:1"
     if ($LASTEXITCODE -ne 0) {

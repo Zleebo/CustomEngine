@@ -18,6 +18,7 @@ project "Engine"
 		"%{dirs.srcdir}/Engine/**.hlsli",
 		"%{dirs.srcdir}/Engine/**.hlsl",
 		"%{dirs.extdir}/DirectXTex/DDSTextureLoader/DDSTextureLoader11.*",
+		"%{dirs.extdir}/DirectXTex/WICTextureLoader/WICTextureLoader11.*",
 	}
 
 	includedirs {
@@ -26,12 +27,16 @@ project "Engine"
 		--"%{dirs.extdir}/simpleson/",
 		"%{dirs.extdir}/rapidjson/include/",
 		"%{dirs.extdir}/DirectXTex/DDSTextureLoader/",
+		"%{dirs.extdir}/DirectXTex/WICTextureLoader/",
 	}
 
 	libdirs { "%{dirs.libdir}" }
 	links { "d3d11.lib", "xaudio2.lib" }
 	
 	filter "files:**/DDSTextureLoader11.cpp"
+	    flags {"NoPCH"}
+
+	filter "files:**/WICTextureLoader11.cpp"
 	    flags {"NoPCH"}
 
 	filter "files:**/TerrainTextureLoader.cpp"
@@ -50,10 +55,12 @@ project "Engine"
 	filter("files:**.ps.hlsl")
 		removeflags("ExcludeFromBuild")
 		shadertype("Pixel")
+		shadermodel("5.0")
 
 	filter("files:**.vs.hlsl")
 		removeflags("ExcludeFromBuild")
 		shadertype("Vertex")
+		shadermodel("5.0")
 
 	filter("files:**.gs.hlsl")
 		removeflags("ExcludeFromBuild")

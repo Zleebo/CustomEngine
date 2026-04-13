@@ -4,7 +4,6 @@
 #include <GraphicsEngine/GraphicsEngine.h>
 #include <Application/ApplicationEntryPoint.h>
 
-#include <Tools/ExampleTool/ExampleTool.h>
 #include <Tools/SceneHierarchy/SceneHierarchy.h>
 #include <Tools/ModelProperties/ModelProperties.h>
 #include <Tools/AssetBrowser/AssetBrowser.h>
@@ -76,7 +75,6 @@ public:
 			mySceneLastWriteTime = std::filesystem::last_write_time("scene.json", ec);
 		}
 
-		//myTools.push_back(local<ExampleTool>(new ExampleTool(myGraphicsEngine)));
 		myTools.push_back(local<ModelProperties>(new ModelProperties(myActiveScene->GetModelList())));
 		myTools.push_back(local<SceneHierarchy>(new SceneHierarchy(myActiveScene)));
 		myTools.push_back(local<AssetBrowser>(new AssetBrowser(myActiveScene)));
@@ -126,8 +124,6 @@ public:
 
 		::Application::Render();
 
-
-		//ImGui::ShowDemoWindow();
 		ImGui_ImplDX11_NewFrame();
 		ImGui_ImplWin32_NewFrame();
 		ImGui::NewFrame();
@@ -344,16 +340,6 @@ public:
 				{
 					myActiveScene->Update(myDeltaTime);
 				}
-		/*		if (ImGui::Button("Pause"))
-				{
-
-				}
-				else
-				{
-					
-				}*/
-			
-
 			}
 		}
 		ImGui::End();

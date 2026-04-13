@@ -77,7 +77,7 @@ bool DX11Framework::Init(std::shared_ptr<WindowHandler> aWindowHandler)
 		return false;
 	}
 
-	// TEMP
+	// Create the default depth buffer that matches the swapchain back buffer.
 	ID3D11Texture2D* depthBufferTexture;
 	D3D11_TEXTURE2D_DESC depthBufferDesc = { 0 };
 	depthBufferDesc.Width = static_cast<unsigned int>(myWindowHandler->GetWidth());
@@ -108,15 +108,12 @@ bool DX11Framework::Init(std::shared_ptr<WindowHandler> aWindowHandler)
 	viewport.MinDepth = 0.0f;
 	viewport.MaxDepth = 1.0f;
 	Context->RSSetViewports(1, &viewport);
-	//END TEMP
 
 	return true;
 }
 
 void DX11Framework::BeginFrame(std::array<float, 4> aClearColor)
 {
-	//Context->ClearRenderTargetView(BackBuffer, &aClearColor[0]);
-	//Context->ClearDepthStencilView(DepthBuffer, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 }
 
 void DX11Framework::EndFrame()
@@ -141,102 +138,3 @@ void DX11Framework::Resize(uint32_t aWidth, uint32_t aHeight)
 	myWindowHandler->SetWidth(static_cast<float>(aWidth));
 	myWindowHandler->setHeight(static_cast<float>(aHeight));
 }
-
-/*Resize?
-
-		if (aResolution.x == 0 || aResolution.y == 0)
-	{
-		return;
-	}
-	static float color[4];
-	color[0] = 1;
-	color[1] = 1;
-	color[2] = 1;
-	color[3] = 1;
-
-	Clear(myClearColor);
-	myWindowSize = aResolution;
-
-	CEngine::GetInstance()->myWindowSize = aResolution;
-	CEngine::GetInstance()->myRenderSize = aResolution;
-
-	myDeviceContext->OMSetRenderTargets(0, 0, 0);
-	myDeviceContext->OMSetDepthStencilState(0, 0);
-	myDeviceContext->ClearState();
-	if (myBackbuffer)
-	{
-		myBackbuffer.Reset();
-	}
-	if (myDepthStencilView)
-	{
-		myDepthStencilView.Reset();
-	}
-	if (myDepthStencilBuffer)
-	{
-		myDepthStencilBuffer.Reset();
-	}
-	if (myDepthStencilState)
-	{
-		myDepthStencilState.Reset();
-	}
-	if (!mySwapchain)
-	{
-		return;
-	}
-
-	if (mySwapchain->ResizeBuffers(0, 0, 0, DXGI_FORMAT_UNKNOWN, 0) != S_OK)
-	{
-		ERROR_PRINT("%s", "Could not resize buffers!");
-		return;
-	}
-
-	ID3D11Texture2D* pBuffer = nullptr;
-	if (mySwapchain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&pBuffer) != S_OK)
-	{
-		ERROR_PRINT("%s", "Could not resize buffers!");
-		return;
-	}
-
-	if (!pBuffer)
-	{
-		return;
-	}
-	if (myDevice->CreateRenderTargetView(pBuffer, NULL, myBackbuffer.ReleaseAndGetAddressOf()) != S_OK)
-	{
-		ERROR_PRINT("%s", "Could not resize buffers!");
-		return;
-	}
-
-
-	pBuffer->Release();
-
-	depthBufferDesc.Width = myWindowSize.x;
-	depthBufferDesc.Height = myWindowSize.y;
-
-	HRESULT result = myDevice->CreateTexture2D(&depthBufferDesc, NULL, myDepthStencilBuffer.ReleaseAndGetAddressOf());
-	if (FAILED(result))
-	{
-		ERROR_PRINT("%s", "Create tex2d error");
-		return;
-	}
-
-	result = myDevice->CreateDepthStencilView(myDepthStencilBuffer.Get(), &depthStencilViewDesc, myDepthStencilView.ReleaseAndGetAddressOf());
-	if (FAILED(result))
-	{
-		ERROR_PRINT("%s", "depth stencil view error");
-		return;
-	}
-
-	result = myDevice->CreateDepthStencilState(&depthStencilDesc, myDepthStencilState.ReleaseAndGetAddressOf());
-	if (FAILED(result))
-	{
-		ERROR_PRINT("%s", "Depth stencil error");
-		return;
-	}
-
-	myDeviceContext->RSSetState(myRasterState.Get());
-	myDeviceContext->OMSetDepthStencilState(myDepthStencilState.Get(), 1);
-	myDeviceContext->OMSetRenderTargets(1, myBackbuffer.GetAddressOf(), nullptr);
-
-	SetViewPort(0, 0, (float)myWindowSize.x, (float)myWindowSize.y);
-	*/
